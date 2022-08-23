@@ -1,9 +1,11 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import { withSession } from './../lib/session'
 import styles from '../styles/Home.module.css'
 
-const Home: NextPage = () => {
+const Home: NextPage = (props) => {
+  console.log('props', props)
   return (
     <div className={styles.container}>
       <Head>
@@ -68,5 +70,13 @@ const Home: NextPage = () => {
     </div>
   )
 }
+
+export const getServerSideProps = withSession(async params => {
+  return {
+    props: {
+      noteId: 2
+    }
+  }
+})
 
 export default Home
